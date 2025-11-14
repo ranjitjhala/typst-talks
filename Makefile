@@ -1,4 +1,4 @@
-all: pliss2025.pdf
+all: ucsc2025.pdf
 
 %.pdf: %.typ
 	@echo "Compiling $< to $@..."

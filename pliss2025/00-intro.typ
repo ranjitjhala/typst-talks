@@ -108,7 +108,7 @@
 
       ][
 
-        Integer Overlflows
+        Integer Overflows
 
       ][
 
@@ -150,7 +150,7 @@
         Array Overflows
 
 
-        Integer Overlflows
+        Integer Overflows
 
 
         User def. invariants

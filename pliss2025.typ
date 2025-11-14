@@ -2,10 +2,10 @@
 #import "iowa_crisp.typ": *
 #show: crisp
 
-#include "src/00-intro.typ"
-#include "src/01-refinements.typ"
-#include "src/02-ownership.typ"
-#include "src/03-datatypes.typ"
-#include "src/04-interfaces.typ"
-#include "src/05-tock.typ"
-#include "src/06-outro.typ"
+#include "pliss2025/00-intro.typ"
+#include "pliss2025/01-refinements.typ"
+#include "pliss2025/02-ownership.typ"
+#include "pliss2025/03-datatypes.typ"
+#include "pliss2025/04-interfaces.typ"
+#include "pliss2025/05-tock.typ"
+#include "pliss2025/06-outro.typ"

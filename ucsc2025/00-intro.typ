@@ -3,13 +3,15 @@
 
 
 #slide[
-  = Refinement Types for Rust
+  #text(1.3em)[*Refinement Types for Verified Systems*]
 
   #v(1em)
 
   #figure(image("../img/flux.png", width: 50%))
 
-  Nico Lehmann, Adam Geller, Niki Vazou, #ttblue[_*Ranjit Jhala*_]
+  #v(.2em)
+
+  #ttblue[_*Ranjit Jhala*_], UC San Diego
 
 ]
 
@@ -108,7 +110,7 @@
 
       ][
 
-        Integer Overlflows
+        Integer Overflows
 
       ][
 
@@ -150,7 +152,7 @@
         Array Overflows
 
 
-        Integer Overlflows
+        Integer Overflows
 
 
         User def. invariants
@@ -166,244 +168,168 @@
   ]
 ]
 
-
-#slide[
-  = Refinement Types
-
-  #text(0.7em)[
-    #link("https://ecommons.cornell.edu/items/070f5ca5-89f5-4c40-8a7a-84ff38016a3b")[Constable & Smith 1987],
-    #link("https://dl.acm.org/doi/pdf/10.1145/267895.267898")[Rushby et al. 1997]
-  ]
-
-  #show: later
-  #v(-3em)
-
-  #text(3em)[#ttgreen[`B`]`{`#ttblue[`x`] : #ttpurple[`p`]`}`]
-
-  #v(-2em)
-
-  #toolbox.side-by-side(gutter: 0.01em, columns: (1fr, 2fr, 2fr, 2fr, 1fr))[][
-    #ttgreen[Base-type]
-  ][
-    #ttblue[Value name]
-  ][
-    #ttpurple[Refinement]
-  ][]
-
-
-  #show: later
-  #text(1.2em)[“Set of values #ttblue[`x`] of type #ttgreen[`B`] such that #ttpurple[`p`] is true”]
-
-]
-
-#slide[
-  = Refinement Types
-
-  #text(0.7em)[
-    #link("https://ecommons.cornell.edu/items/070f5ca5-89f5-4c40-8a7a-84ff38016a3b")[Constable & Smith 1987],
-    #link("https://dl.acm.org/doi/pdf/10.1145/267895.267898")[Rushby et al. 1997]
-  ]
-
-
-  #v(-3em)
-
-  #text(3em)[#ttgreen[`Int`]`{`#ttblue[`x`] : #ttpurple[`0 < x`]`}`]
-
-  #v(-2em)
-
-  #toolbox.side-by-side(gutter: 0.01em, columns: (1fr, 2fr, 2fr, 2fr, 1fr))[][
-    #ttgreen[Base-type]
-  ][
-    #ttblue[Value name]
-  ][
-    #ttpurple[Refinement]
-  ][]
-
-  #text(1.2em)[“Set of _positive integers_"]
-]
-
 #slide[
 
-  #v(-1em)
+  #v(-0.9em)
 
-  == Refinement Types for _Functional_ Code
+  === #text(1.1em)[What _is_ Programming Languages Research?]
 
-  #v(2em)
+  Advances in Program Analysis and Verification
 
-  #grid(
+  #v(-0.2em)
+
+  #table(
     columns: 4,
-    gutter: 1em,
-    [#image("../img/liquidhaskell.png", height: 1.7in)],
-    [#image("../img/fstar.png", height: 1.7in)],
-    [#image("../img/sail.png", height: 1.7in)],
-    [#image("../img/arm.svg", height: 0.7in)],
+    stroke: none,
+    align: left,
+    inset: 20pt,
+    [#uncover("2-")[#text(fill: rgb("#3803e8"))[_SMT_]]],
+    [#uncover("3-")[#text(fill: purple)[_Abs-Interp._]]],
+    [#uncover("4-")[#text(fill: orange)[_Dataflow_]]],
+    [#uncover("5-")[#text(fill: rgb("#e8ca03"))[_Proof Assist._]]],
 
-    [LiquidHaskell], [F#super[★]], [SAIL], [ASL],
-    [#link("https://ucsd-progsys.github.io/liquidhaskell/")[#text(0.6em)[Vazou et al. 2014]]],
-    [#link("https://fstar-lang.org/")[#text(0.6em)[Swamy et al. 2016]]],
-    [#link("https://github.com/rems-project/sail")[#text(0.6em)[Sewell et al. 2019]]],
-    [#link("https://developer.arm.com/Architectures/Architecture%20Specification%20Language")[#text(0.6em)[Reid 2019]]],
+    [#uncover("6-")[#text(fill: red)[_Symex_]]],
+    [#uncover("7-")[#text(fill: darkgreen)[_Model-Check_]]],
+    [#uncover("8-")[#text(fill: rgb("#964B00"))[_Synthesis_]]],
+    [#uncover("9-")[#text(fill: teal)[_LLMs_...]]],
   )
+
+  #uncover("10-")[
+    *Why limited impact and adoption?*
+    #v(-0.3em)
+    #text(0.95em)[(_cf._ _Profilers, Garbage Collection, Version Control, Debuggers…_)]
+  ]
 ]
 
 
 #slide[
 
-  #v(-0.6em)
+  #v(-0.9em)
 
-  == Refinement Types for _Imperative_ Code?
+  === Why limited impact and adoption?
 
-  #v(1em)
+  #v(0.2em)
 
-  #show: later
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.07fr, size: 1em)[
-    ```rust
-    fn foo(mut x: i32, y: i32{v: x < v}) {
-      x += 1;
-      ...
-    }
-    ```
-  ]
-
-  #ttwhite[
-    *Problem:* Dependency on _mutable_ variables!
-    #v(-0.5em)
-    What does refinement _mean_ if `x` can change?
-
-  ]
-
-
+  #figure(image("../img/adoption-1.png", width: 95%))
 ]
 
 #slide[
 
-  #v(-0.8em)
+  #v(-0.9em)
 
-  == Refinement Types for _Imperative_ Code?
+  === Why limited impact and adoption?
 
-  #v(1em)
+  #v(0.2em)
 
-  #codly(
-    highlights: (
-      (line: 1, start: 30, end: 34, fill: orange),
-      (line: 2, start: 3, end: 8, fill: orange),
-    ),
-  )
-  #codebox(pad: 0.07fr, size: 1em)[
-    ```rust
-    fn foo(mut x: i32, y: i32{v: x < v}) {
-      x += 1;
-      ...
-    }
-    ```
+  #figure(image("../img/adoption-2.png", width: 95%))
+]
+
+#slide[
+
+  #v(-0.9em)
+
+  === Why limited impact and adoption?
+
+  #v(0.2em)
+
+  #figure(image("../img/adoption-3.png", width: 95%))
+]
+
+#slide[
+
+  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
+
+    #text(2em)[But ... _how_?]
+
+  ][
+    #figure(image("../img/reftypes-cycle-1.png", width: 95%))
+
   ]
+]
 
-  *Problem:* Dependency on _mutable_ variables!
+#slide[
+
+  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
+
+    #text(2em)[But ... _how_?]
+
+  ][
+    #figure(image("../img/reftypes-cycle-2.png", width: 95%))
+
+  ]
+]
+
+
+
+#slide[
+
   #v(-0.5em)
-  What does refinement _mean_ if `x` can change?
 
-]
+  == Refinement Types for Verified Systems
 
-#slide[
+  #v(0.6em)
 
-  #text(3em)[*March 2019*]
+  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
 
-]
+    #figure(image("../img/reftypes-cycle-2.png", width: 85%))
 
-#slide[
-  #figure(image("../img/nico-1.png", height: 110%))
-]
+  ][
+    #text(0.7em)[
 
-#slide[
-  #figure(image("../img/nico-2.png", height: 110%))
-]
-#slide[
-  #figure(image("../img/nico-3.png", height: 110%))
-]
+      Null Derefs
 
-#slide[
-  #figure(image("../img/nico-4a.png", height: 110%))
-]
+      Array Overflows
 
-#slide[
-  #figure(image("../img/nico-4b.png", height: 110%))
-]
+      Integer Overflows
 
-#slide[
-  #figure(image("../img/nico-5.png", height: 110%))
-]
+      User def. invariants
 
+      Security Requirements
 
-#slide[
-  #v(-1em)
-
-  #text(3em)[*... 6 years#super[†] later*]
-
-  #super[†] and 1500 commits and 60KLoc later ...
-
-]
-
-#slide[
-
-  #figure(image("../img/nico-champagne.png", width: 100%))
-
-]
-
-
-#slide[
-  #figure(image("../img/flux.png", width: 63%))
-
-  (/flʌks/)
-
-  #v(0.81em)
-
-  #text(size: 0.75em)[_n. 1 a flowing or flow. 2 a substance used to refine metals. v. 3 to melt; make fluid._]
-]
-
-
-#slide[
-
-  == I. Programs
-
-  Refinements for Rust
-
-  == II. Analysis
-
-  Type-directed Abstract Interpretation
-
-  == III. Results
-
-  Verified Process Isolation in Tock OS
-
-]
-
-
-
-#slide[
-
-  = Refinements for Rust
-
-  #v(1em)
-
-  #center-block(pad: 0.4fr)[
-    #one-by-one[
-
-      *1. _Refinements_* `i32`, `bool`, ...
-
-    ][
-
-      *2. _Ownership_* `mut`, `&`, `&mut`, ...
-
-    ][
-
-      *3. _Datatypes_* `struct`, `enum`, ...
-
-    ][
-
-      *4. _Interfaces_* `trait`, `impl`, ...
+      Functional Correctness
     ]
   ]
+]
 
+
+#slide[
+  #v(-0.9em)
+
+  == Refinement Types for Verified Systems
+
+  #v(1.5em)
+
+  #toolbox.side-by-side(gutter: 0em, columns: (3.5fr, 3fr))[
+    #center-block(pad: 2em)[
+      #uncover("1-")[
+        *1. _Refinement_*
+
+        #text(fill: white, size: 0.8em)[Values & References]
+      ]
+
+      #v(1em)
+
+      #uncover("3-")[
+        *3. _Verified_*
+
+        #text(fill: white, size: 0.8em)[SMT & CHC Solving]
+      ]
+    ]
+  ][
+    #center-block(pad: 2em)[
+      #uncover("2-")[
+        *2. _Types_*
+
+        #text(fill: white, size: 0.8em)[Structs & Enums]
+      ]
+
+      #v(1em)
+
+      #uncover("4-")[
+        *4. _Systems_*
+
+        #text(fill: white, size: 0.8em)[Isolation in Tock OS]
+      ]
+    ]
+  ]
 ]
