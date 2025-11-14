@@ -241,6 +241,10 @@
 
     #text(2em)[But ... _how_?]
 
+    #text(0.8em)[Analysis influences program]
+
+    #text(0.8em)[Program influences analysis]
+
   ][
     #figure(image("../img/reftypes-cycle-1.png", width: 95%))
 
@@ -252,6 +256,11 @@
   #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
 
     #text(2em)[But ... _how_?]
+
+    #text(0.8em)[Analysis influences program]
+
+    #text(0.8em)[Program influences analysis]
+
 
   ][
     #figure(image("../img/reftypes-cycle-2.png", width: 95%))

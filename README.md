@@ -4,29 +4,16 @@ Repo for slides for talks made with typst.
 
 ## UCSC 2025
 
-Plan
+- [x] Intro
 
-- Intro
-    - Orwell
-    - But how?
-    - What _is_ PL research?
-      abs-int etc.
-    - Why limited broader impact and adoption?
-    - Programmer vs Verifier
-    ...
-    - Refinement Types Cycle
-    -  | Analysis influences
+- [ ] Refinements
+  - [ ] basics
+  - [ ] borrows
 
-- Plan
-    - Refinements
-    - Types
-    - Verification
-    - Systems
+- [ ] Types (neural)
+  - [ ] structs
+  - [ ] enums
 
-- Refinements
+- [ ] Verification
 
-- Types
-
-- Verification
-
-- Systems
+- [ ] Systems
