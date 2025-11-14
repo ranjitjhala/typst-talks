@@ -9,18 +9,18 @@
 
   #v(1.5em)
 
-  #toolbox.side-by-side(gutter: 0em, columns: (3.5fr, 3fr))[
+  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
     #center-block(pad: 2em)[
       *1. _Refinement_*
 
-      #text(fill: white, size: 0.8em)[Values & References]
+      #section_subtitle(fill: white)[Index, Existential, Ownership]
 
       #v(1em)
 
       #hide[
         *3. _Verified_*
 
-        #text(fill: white, size: 0.8em)[SMT & CHC Solving]
+        #section_subtitle(fill: white)[SMT & CHC Solving]
       ]
     ]
   ][
@@ -28,45 +28,23 @@
       #hide[
         *2. _Types_*
 
-        #text(fill: white, size: 0.8em)[Structs & Enums]
+        #section_subtitle(fill: white)[Structs & Enums]
 
         #v(1em)
 
         *4. _Systems_*
 
-        #text(fill: white, size: 0.8em)[Isolation in Tock OS]
+        #section_subtitle(fill: white)[Isolation in Tock OS]
 
       ]
     ]
   ]
 ]
 
-// -----------------------------------------
+#slide[ = _1. Refinement_ ]
 
 #slide[
-
-  = Refinements for Rust
-
-  #v(1em)
-
-  #center-block(pad: 0.4fr)[
-
-    *1. _Refinements_* `i32`, `bool`, ...
-
-    #hide[
-      *2. _Ownership_* `mut`, `&`, `&mut`, ...
-
-      *3. _Datatypes_* `struct`, `enum`, ...
-
-      *4. _Interfaces_* `trait`, `impl`, ...
-    ]
-  ]
-]
-
-#slide[ = _1. Refinements_ ]
-
-#slide[
-  = _1. Refinements_
+  = _1. Refinement_
 
   #v(1em)
   #one-by-one[
@@ -75,17 +53,20 @@
 
   ][
 
-    *Parameters* abstract over #ttpurple[_input values_]
+    *Parameters* abstract over #ttpurple[_inputs_]
 
   ][
 
-    *Existential* specifies unknown #ttpurple[_sets of values_]
+    *Existentials* represent #ttpurple[_sets of values_]
 
+  ][
+
+    *Ownership* enables sound #ttpurple[_type updates_]
   ]
 ]
 
 #slide[
-  = _1. Refinements_
+  = _1. Refinement_
 
   #v(1em)
 
@@ -93,9 +74,12 @@
 
   #hide[
 
-    *Parameters* abstract over #ttpurple[_input values_]
+    *Parameters* abstract over #ttpurple[_inputs_]
 
-    *Existential* specifies unknown #ttpurple[_sets of values_]
+    *Existentials* represent #ttpurple[_sets of values_]
+
+    *Ownership* enables sound #ttpurple[_type updates_]
+
   ]
 
 ]
@@ -332,17 +316,20 @@
 
 
 #slide[
-  = _1. Refinements_
+  = _1. Refinement_
 
   #v(1em)
 
   *Index* specifies #ttpurple[_single value_]
 
-  *Parameters* abstract over #ttpurple[_input values_]
+  *Parameters* abstract over #ttpurple[_inputs_]
 
   #hide[
 
-    *Existential* specifies unknown #ttpurple[_sets of values_]
+    *Existentials* represent #ttpurple[_sets of values_]
+
+    *Ownership* enables sound #ttpurple[_type updates_]
+
   ]
 
 ]
@@ -363,28 +350,32 @@
   But what if we #ttpurple[_don't know_] the exact value?
 ]
 
-
 #slide[
-  = _1. Refinements_
+  = _1. Refinement_
 
   #v(1em)
 
   #hide[
     *Index* specifies #ttpurple[_single value_]
 
-    *Parameters* abstract over #ttpurple[_input values_]
+    *Parameters* abstract over #ttpurple[_inputs_]
   ]
 
-  *Existential* specifies unknown #ttpurple[_sets of values_]
+  *Existentials* represent #ttpurple[_sets of values_]
+
+  #hide[
+    *Ownership* enables sound #ttpurple[_type updates_]
+
+  ]
 
 ]
 
-#slide[ = *Existential* specifies #ttpurple[_sets of values_] ]
+#slide[ = *Existentials* represent #ttpurple[_sets of values_] ]
 
 
 #slide[
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   #v(2em)
 
@@ -402,7 +393,7 @@
 
   #v(-0.3em)
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   #v(2em)
 
@@ -419,7 +410,7 @@
 
   #v(-0.3em)
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   #v(2em)
 
@@ -436,7 +427,7 @@
 
   #v(-0.3em)
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   #v(2em)
 
@@ -453,7 +444,7 @@
 
   #v(-1.3em)
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   `abs` _returns_ a non-negative #ttgreen[`i32`]
 
@@ -484,7 +475,7 @@
 
 #slide[
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   `get` _requires_ a valid index!
 
@@ -505,7 +496,7 @@
 
 #slide[
 
-  = *Existential* specifies #ttpurple[_sets of values_]
+  = *Existentials* represent #ttpurple[_sets of values_]
 
   `get` _requires_ a valid index!
 
@@ -524,35 +515,134 @@
 ]
 
 #slide[
-  = _1. Refinements_
+  = _1. Refinement_
 
   #v(1em)
 
-  *Index* specifies #ttpurple[_single value_]
+  #hide[
+    *Index* specifies #ttpurple[_single value_]
 
-  *Parameters* abstract over #ttpurple[_input values_]
+    *Parameters* abstract over #ttpurple[_inputs_]
+  ]
 
-  *Existential* specifies unknown #ttpurple[_sets of values_]
+  *Existentials* represent #ttpurple[_sets of values_]
+
+  #hide[
+
+    *Ownership* enables sound #ttpurple[_type updates_]
+
+  ]
 
 ]
 
 #slide[
-
-  = Refinements for Rust
+  = _1. Refinement_
 
   #v(1em)
 
-  #center-block(pad: 0.4fr)[
+  #hide[
+    *Index* specifies #ttpurple[_single value_]
 
-    *1. _Refinements_* `i32`, `bool`, ...
+    *Parameters* abstract over #ttpurple[_inputs_]
 
-    #hide[
+    *Existentials* represent #ttpurple[_sets of values_]
+  ]
 
-      *2. _Ownership_* `mut`, `&`, `&mut`, ...
+  *Ownership* enables sound #ttpurple[_type updates_]
 
-      *3. _Datatypes_* `struct`, `enum`, ...
+]
 
-      *4. _Interfaces_* `trait`, `impl`, ...
+#slide[
+  == *Ownership* enables sound #ttpurple[_type updates_]
+
+  #v(1em)
+
+  #uncover("2-")[
+    #text(1.3em)[At #ttgreen[_owned locations_] and #ttgreen[_mutable references_]]
+  ]
+]
+
+#slide[ = #ttpurple[*_Type updates_*] at #ttgreen[_owned locations_] ]
+
+#slide[
+  == #ttpurple[*_Type updates_*] at #ttgreen[_owned locations_]
+
+  #v(1em)
+
+  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
+  #codebox(size: 0.8em, pad: .20fr)[
+    #reveal-code(lines: (2, 4, 6), full: false)[
+      ```rust
+      let mut x = 0;    // x : i32[0]
+      assert(x == 0);
+      x += 10;          // x : i32[10]
+      assert(x == 10);
+      x += 10;          // x : i32[20]
+      assert(x == 20);
+      ```
     ]
   ]
+
+  Exclusive ownership allows strong updates
+
+]
+
+#slide[ = #ttpurple[*_Type updates_*] at #ttgreen[_mutable references_] ]
+
+#slide[
+
+  #v(-0.5em)
+
+  == #ttpurple[*_Type updates_*] at #ttgreen[_mutable references_]
+
+  #v(0.5em)
+
+  #codly(highlights: ((line: 200, start: 0, end: 5, fill: red),))
+  #codebox(size: 0.7em, pad: .20fr)[
+    #reveal-code(lines: (4, 6, 9), full: false)[
+      ```rust
+      fn incr(x: &mut i32[@n]) ensures x: i32[n+1] {
+        *x += 1;
+      }
+
+      fn test() {
+        let mut z = 1;  // z: i32[1]
+        incr(&z);
+        assert(z == 2); // z: i32[2]
+      }
+      ```
+    ]
+  ]
+
+  #uncover("3")[
+    #v(-0.5em)
+
+    Sound as Rust ensures `&mut` is _unique_ (no aliasing)
+  ]
+
+]
+
+#slide[
+  == *Ownership* enables sound #ttpurple[_type updates_]
+
+  #v(1em)
+
+  #text(1.3em)[At #ttgreen[_owned locations_] and #ttgreen[_mutable references_]]
+]
+
+#slide[
+  = _1. Refinement_
+
+  #v(1em)
+
+  #hide[
+    *Index* specifies #ttpurple[_single value_]
+
+    *Parameters* abstract over #ttpurple[_inputs_]
+
+    *Existentials* represent #ttpurple[_sets of values_]
+  ]
+
+  *Ownership* enables sound #ttpurple[_type updates_]
+
 ]

@@ -308,12 +308,12 @@
 
   #v(1.5em)
 
-  #toolbox.side-by-side(gutter: 0em, columns: (3.5fr, 3fr))[
+  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
     #center-block(pad: 2em)[
       #uncover("1-")[
         *1. _Refinement_*
 
-        #text(fill: white, size: 0.8em)[Values & References]
+        #section_subtitle(fill: white)[Index, Existential, Ownership]
       ]
 
       #v(1em)
@@ -321,7 +321,7 @@
       #uncover("3-")[
         *3. _Verified_*
 
-        #text(fill: white, size: 0.8em)[SMT & CHC Solving]
+        #section_subtitle(fill: white)[SMT & CHC Solving]
       ]
     ]
   ][
@@ -329,7 +329,7 @@
       #uncover("2-")[
         *2. _Types_*
 
-        #text(fill: white, size: 0.8em)[Structs & Enums]
+        #section_subtitle(fill: white)[Structs & Enums]
       ]
 
       #v(1em)
@@ -337,7 +337,7 @@
       #uncover("4-")[
         *4. _Systems_*
 
-        #text(fill: white, size: 0.8em)[Isolation in Tock OS]
+        #section_subtitle(fill: white)[Isolation in Tock OS]
       ]
     ]
   ]

@@ -10,32 +10,32 @@
 
   #v(1.5em)
 
-  #toolbox.side-by-side(gutter: 0em, columns: (3.5fr, 3fr))[
+  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
     #center-block(pad: 2em)[
       #hide[
         *1. _Refinement_*
 
-        #text(size: 0.8em)[Values & References]
+        #section_subtitle[Index, Existential, Ownership]
 
         #v(1em)
       ]
 
       *3. _Verified_*
 
-      #text(fill: white, size: 0.8em)[SMT & CHC Solving]
+      #section_subtitle(fill: white)[SMT & CHC Solving]
     ]
   ][
     #center-block(pad: 2em)[
       #hide[
         *2. _Types_*
 
-        #text(size: 0.8em)[Structs & Enums]
+        #section_subtitle[Structs & Enums]
 
         #v(1em)
 
         *4. _Systems_*
 
-        #text(fill: white, size: 0.8em)[Isolation in Tock OS]
+        #section_subtitle(fill: white)[Isolation in Tock OS]
       ]
     ]
   ]
@@ -50,32 +50,32 @@
 
   #v(1.5em)
 
-  #toolbox.side-by-side(gutter: 0em, columns: (3.5fr, 3fr))[
+  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
     #center-block(pad: 2em)[
       #hide[
         *1. _Refinement_*
 
-        #text(size: 0.8em)[Values & References]
+        #section_subtitle[Index, Existential, Ownership]
 
         #v(1em)
       ]
 
       *3. _Verified_*
 
-      #text(size: 0.8em)[SMT & CHC Solving]
+      #section_subtitle[SMT & CHC Solving]
     ]
   ][
     #center-block(pad: 2em)[
       #hide[
         *2. _Types_*
 
-        #text(size: 0.8em)[Structs & Enums]
+        #section_subtitle[Structs & Enums]
 
         #v(1em)
 
         *4. _Systems_*
 
-        #text(fill: white, size: 0.8em)[Isolation in Tock OS]
+        #section_subtitle(fill: white)[Isolation in Tock OS]
       ]
     ]
   ]

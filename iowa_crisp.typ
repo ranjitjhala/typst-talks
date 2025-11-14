@@ -87,6 +87,13 @@
   )
 }
 
+#let section_subtitle(body, fill: none, size: 0.7em) = {
+  if fill == none {
+    text(size: size)[#body]
+  } else {
+    text(fill: fill, size: size)[#body]
+  }
+}
 
 #let codebox_orig(body) = {
   box(
