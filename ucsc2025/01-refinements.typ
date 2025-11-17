@@ -2,68 +2,9 @@
 #import "../iowa_crisp.typ": *
 
 
-#slide[
-  #v(-0.9em)
-
-  == Refinement Types for Verified Systems
-
-  #v(1.5em)
-
-  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
-    #center-block(pad: 2em)[
-      *1. _Refinement_*
-
-      #section_subtitle(fill: white)[Index, Existential, Ownership]
-
-      #v(1em)
-
-      #hide[
-        *3. _Verified_*
-
-        #section_subtitle(fill: white)[SMT & CHC Solving]
-      ]
-    ]
-  ][
-    #center-block(pad: 2em)[
-      #hide[
-        *2. _Types_*
-
-        #section_subtitle(fill: white)[Structs & Enums]
-
-        #v(1em)
-
-        *4. _Systems_*
-
-        #section_subtitle(fill: white)[Isolation in Tock OS]
-
-      ]
-    ]
-  ]
-]
-
 #slide[ = _1. Refinement_ ]
 
-#slide[
-  = _1. Refinement_
 
-  #v(1em)
-  #one-by-one[
-
-    *Index* specifies #ttpurple[_single value_]
-
-  ][
-
-    *Parameters* abstract over #ttpurple[_inputs_]
-
-  ][
-
-    *Existentials* represent #ttpurple[_sets of values_]
-
-  ][
-
-    *Ownership* enables sound #ttpurple[_type updates_]
-  ]
-]
 
 #slide[
   = _1. Refinement_
@@ -72,19 +13,52 @@
 
   *Index* specifies #ttpurple[_single value_]
 
-  #hide[
-
-    *Parameters* abstract over #ttpurple[_inputs_]
-
-    *Existentials* represent #ttpurple[_sets of values_]
-
-    *Ownership* enables sound #ttpurple[_type updates_]
-
-  ]
-
 ]
 
-#slide[ = *Index* specifies #ttpurple[_single value_] ]
+
+
+// #slide[
+//   = _1. Refinement_
+
+//   #v(1em)
+//   #one-by-one[
+
+//     *Index* specifies #ttpurple[_single value_]
+
+//   ][
+
+//     *Parameters* abstract over #ttpurple[_inputs_]
+
+//   ][
+
+//     *Existentials* represent #ttpurple[_sets of values_]
+
+//   ][
+
+//     *Ownership* enables sound #ttpurple[_type updates_]
+//   ]
+// ]
+
+// #slide[
+//   = _1. Refinement_
+
+//   #v(1em)
+
+//   *Index* specifies #ttpurple[_single value_]
+
+//   #hide[
+
+//     *Parameters* abstract over #ttpurple[_inputs_]
+
+//     *Existentials* represent #ttpurple[_sets of values_]
+
+//     *Ownership* enables sound #ttpurple[_type updates_]
+
+//   ]
+
+// ]
+
+// #slide[ = *Index* specifies #ttpurple[_single value_] ]
 
 
 #slide[
@@ -324,13 +298,13 @@
 
   *Parameters* abstract over #ttpurple[_inputs_]
 
-  #hide[
+  // #hide[
 
-    *Existentials* represent #ttpurple[_sets of values_]
+  //   *Existentials* represent #ttpurple[_sets of values_]
 
-    *Ownership* enables sound #ttpurple[_type updates_]
+  //   *Ownership* enables sound #ttpurple[_type updates_]
 
-  ]
+  // ]
 
 ]
 
@@ -363,10 +337,9 @@
 
   *Existentials* represent #ttpurple[_sets of values_]
 
-  #hide[
-    *Ownership* enables sound #ttpurple[_type updates_]
-
-  ]
+  // #hide[
+  //   *Ownership* enables sound #ttpurple[_type updates_]
+  // ]
 
 ]
 
@@ -527,11 +500,7 @@
 
   *Existentials* represent #ttpurple[_sets of values_]
 
-  #hide[
-
-    *Ownership* enables sound #ttpurple[_type updates_]
-
-  ]
+  #text(fill: white)[...]
 
 ]
 
@@ -583,7 +552,7 @@
     ]
   ]
 
-  Exclusive ownership allows strong updates
+  #ttgreen[*_Exclusive ownership_*] allows strong updates
 
 ]
 
@@ -617,7 +586,7 @@
   #uncover("3")[
     #v(-0.5em)
 
-    Sound as Rust ensures `&mut` is _unique_ (no aliasing)
+    Sound as Rust ensures `&mut` has #ttgreen[*_no aliases_*]
   ]
 
 ]
@@ -645,4 +614,48 @@
 
   *Ownership* enables sound #ttpurple[_type updates_]
 
+]
+
+#slide[
+
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #text(1.2em)[*_1. Refinement_*]
+
+    #section_subtitle[Index, Exist & Update]
+  ][
+    #hide[
+      #text(1.2em)[*_2. Types_*]
+
+      #section_subtitle(fill: white)[Struct & Enum]
+    ]
+  ][
+    #hide[
+      #text(1.2em)[*_3. Verified Systems_*]
+
+      #section_subtitle(fill: white)[Isolation in Tock OS Kernel]
+    ]
+  ]
+]
+
+
+
+#slide[
+
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #hide[
+      #text(1.2em)[*_1. Refinement_*]
+
+      #section_subtitle[Index, Exist & Update]
+    ]
+  ][
+    #text(1.2em)[*_2. Types_*]
+
+    #section_subtitle(fill: white)[Struct & Enum]
+  ][
+    #hide[
+      #text(1.2em)[*_3. Verified Systems_*]
+
+      #section_subtitle(fill: white)[Isolation in Tock OS Kernel]
+    ]
+  ]
 ]

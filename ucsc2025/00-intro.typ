@@ -73,57 +73,31 @@
 
 #slide[
 
-  #v(-0.7em)
+  #v(-2.2em)
 
   === #text(1.1em)[What _is_ Programming Languages Research?]
 
-  #v(0.6em)
+  #v(0.3em)
 
-  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
-    #hide[
-      #text(1.0em)[
-        #align(left)[
-          _“We shall make_
-          #v(-0.5em)
-          #strike(stroke: 3pt + myred)[_thoughtcrime_] #ttred[*_bugs_*]
-          #v(-0.5em)
-          _literally impossible:_
-          #v(-0.5em)
-          _there will be no words_
-          #v(-0.5em)
-          _to express it.”_
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
 
-          --- George Orwell (1984)
-        ]
-      ]
-    ]
+    #figure(image("../img/rust-logo.png", height: 70%))
+
   ][
-    #text(0.8em)[
 
-      #one-by-one()[
+    #text(1.0em)[
+      #align(left)[
+        _“We shall make_
+        #v(-0.5em)
+        #strike(stroke: 3pt + myred)[_thoughtcrime_] #ttred[*_bugs_*]
+        #v(-0.5em)
+        _literally impossible:_
+        #v(-0.5em)
+        _there will be no words_
+        #v(-0.5em)
+        _to express it.”_
 
-        Null Derefs
-
-      ][
-
-        Array Overflows
-
-      ][
-
-        Integer Overflows
-
-      ][
-
-        User def. invariants
-
-      ][
-
-        Security Requirements
-
-      ][
-
-        Functional Correctness
-
+        --- George Orwell (1984)
       ]
     ]
   ]
@@ -132,160 +106,150 @@
 
 #slide[
 
-  #v(-0.9em)
+  #v(-3.1em)
 
   === #text(1.1em)[What _is_ Programming Languages Research?]
 
-  #v(0.9em)
+  #v(1.2em)
 
-  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
 
-    #text(2em)[But ... _how_?]
+    #figure(image("../img/rust-logo.png", height: 70%))
+
+  ][
+
+    #text(1.0em)[
+
+      *Rust Types Ensure*
+
+      Memory safety
+
+      Race freedom
+
+    ]
+  ]
+]
+
+#slide[
+  #v(-3.1em)
+
+  === #text(1.1em)[What _is_ Programming Languages Research?]
+
+  #v(1.2em)
+
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+
+    #figure(image("../img/rust-logo.png", height: 70%))
+
+  ][
+
+    #figure(image("../img/android-rust-stats.png", height: 63%))
+
+  ]
+]
+
+#slide[
+  #v(-3.5em)
+
+  === #text(1.1em)[What _is_ Programming Languages Research?]
+
+  #v(1.6em)
+
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+
+    #text(1.8em)[_Other bugs?_]
+
+  ][
+
+    #figure(image("../img/android-rust-stats.png", height: 63%))
+
+  ]
+]
+
+
+
+#slide[
+  #v(-3.3em)
+
+  === #text(1.1em)[What _is_ Programming Languages Research?]
+
+  #v(1.4em)
+
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+
+    #text(1.8em)[_Other bugs?_]
+
+  ][
+      #text(0.8em)[
+        #one-by-one()[
+
+          Array Overflows
+
+        ][
+
+          Integer Overflows
+
+        ][
+
+          User def. invariants
+
+        ][
+
+          Security Requirements
+
+        ][
+
+          Functional Correctness
+
+        ]
+    ]
+  ]
+]
+
+
+#slide[
+  #v(-3.3em)
+
+  === #text(1.1em)[What _is_ Programming Languages Research?]
+
+  #v(1.4em)
+
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+
+    #text(1.8em)[_Other bugs?_]
 
   ][
     #hide[
       #text(0.8em)[
-
-        Null Derefs
-
-
         Array Overflows
-
 
         Integer Overflows
 
-
         User def. invariants
-
 
         Security Requirements
 
-
         Functional Correctness
-
       ]
     ]
   ]
 ]
 
-#slide[
-
-  #v(-0.9em)
-
-  === #text(1.1em)[What _is_ Programming Languages Research?]
-
-  Advances in Program Analysis and Verification
-
-  #v(-0.2em)
-
-  #table(
-    columns: 4,
-    stroke: none,
-    align: left,
-    inset: 20pt,
-    [#uncover("2-")[#text(fill: rgb("#3803e8"))[_SMT_]]],
-    [#uncover("3-")[#text(fill: purple)[_Abs-Interp._]]],
-    [#uncover("4-")[#text(fill: orange)[_Dataflow_]]],
-    [#uncover("5-")[#text(fill: rgb("#e8ca03"))[_Proof Assist._]]],
-
-    [#uncover("6-")[#text(fill: red)[_Symex_]]],
-    [#uncover("7-")[#text(fill: darkgreen)[_Model-Check_]]],
-    [#uncover("8-")[#text(fill: rgb("#964B00"))[_Synthesis_]]],
-    [#uncover("9-")[#text(fill: teal)[_LLMs_...]]],
-  )
-
-  #uncover("10-")[
-    *Why limited impact and adoption?*
-    #v(-0.3em)
-    #text(0.95em)[(_cf._ _Profilers, Garbage Collection, Version Control, Debuggers…_)]
-  ]
-]
-
 
 #slide[
 
-  #v(-0.9em)
-
-  === Why limited impact and adoption?
-
-  #v(0.2em)
-
-  #figure(image("../img/adoption-1.png", width: 95%))
-]
-
-#slide[
-
-  #v(-0.9em)
-
-  === Why limited impact and adoption?
-
-  #v(0.2em)
-
-  #figure(image("../img/adoption-2.png", width: 95%))
-]
-
-#slide[
-
-  #v(-0.9em)
-
-  === Why limited impact and adoption?
-
-  #v(0.2em)
-
-  #figure(image("../img/adoption-3.png", width: 95%))
-]
-
-#slide[
-
-  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
-
-    #text(2em)[But ... _how_?]
-
-    #text(0.8em)[Analysis influences program]
-
-    #text(0.8em)[Program influences analysis]
-
-  ][
-    #figure(image("../img/reftypes-cycle-1.png", width: 95%))
-
-  ]
-]
-
-#slide[
-
-  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
-
-    #text(2em)[But ... _how_?]
-
-    #text(0.8em)[Analysis influences program]
-
-    #text(0.8em)[Program influences analysis]
-
-
-  ][
-    #figure(image("../img/reftypes-cycle-2.png", width: 95%))
-
-  ]
-]
-
-
-
-#slide[
-
-  #v(-0.5em)
+  #v(-3.3em)
 
   == Refinement Types for Verified Systems
 
-  #v(0.6em)
+  #v(1.4em)
 
-  #toolbox.side-by-side(gutter: 1em, columns: (1fr, 1fr))[
+  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
 
-    #figure(image("../img/reftypes-cycle-2.png", width: 85%))
+    #figure(image("../img/flux.png", width: 115%))
 
   ][
-    #text(0.7em)[
-
-      Null Derefs
+    #text(0.8em)[
 
       Array Overflows
 
@@ -302,43 +266,24 @@
 
 
 #slide[
-  #v(-0.9em)
 
-  == Refinement Types for Verified Systems
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #uncover("1-")[
+      #text(1.2em)[*_1. Refinement_*]
 
-  #v(1.5em)
-
-  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
-    #center-block(pad: 2em)[
-      #uncover("1-")[
-        *1. _Refinement_*
-
-        #section_subtitle(fill: white)[Index, Existential, Ownership]
-      ]
-
-      #v(1em)
-
-      #uncover("3-")[
-        *3. _Verified_*
-
-        #section_subtitle(fill: white)[SMT & CHC Solving]
-      ]
+      #section_subtitle(fill: white)[Index, Exist & Update]
     ]
   ][
-    #center-block(pad: 2em)[
-      #uncover("2-")[
-        *2. _Types_*
+    #uncover("2-")[
+      #text(1.2em)[*_2. Types_*]
 
-        #section_subtitle(fill: white)[Structs & Enums]
-      ]
+      #section_subtitle(fill: white)[Struct & Enum]
+    ]
+  ][
+    #uncover("3-")[
+      #text(1.2em)[*_3. Verified Systems_*]
 
-      #v(1em)
-
-      #uncover("4-")[
-        *4. _Systems_*
-
-        #section_subtitle(fill: white)[Isolation in Tock OS]
-      ]
+      #section_subtitle(fill: white)[Isolation in Tock OS Kernel]
     ]
   ]
 ]

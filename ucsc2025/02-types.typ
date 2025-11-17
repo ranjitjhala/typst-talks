@@ -4,44 +4,6 @@
 
 // BEGIN-SECTION
 
-#slide[
-  #v(-0.9em)
-
-  == Refinement Types for Verified Systems
-
-  #v(1.5em)
-
-  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
-    #center-block(pad: 2em)[
-      #hide[
-        *1. _Refinement_*
-
-        #section_subtitle[Index, Existential, Ownership]
-
-        #v(1em)
-
-        *3. _Verified_*
-
-        #section_subtitle(fill: white)[SMT & CHC Solving]
-      ]
-    ]
-  ][
-    #center-block(pad: 2em)[
-        *2. _Types_*
-
-        #section_subtitle(fill: white)[Structs & Enums]
-
-      #hide[
-        #v(1em)
-
-        *4. _Systems_*
-
-        #section_subtitle(fill: white)[Isolation in Tock OS]
-      ]
-    ]
-  ]
-]
-
 #slide[ = _2. Types_]
 
 #slide[
@@ -292,70 +254,6 @@
 ]
 
 
-
-#slide[
-
-  == I. Programs
-
-  Refinements for Rust
-
-
-  == II. Analysis
-
-  Type-directed Abstract Interpretation
-
-
-  == III. Results
-
-  Verified _Process Isolation_ in Tock OS
-]
-
-#slide[
-
-  = Refinements for Rust
-
-  #v(1em)
-
-  #center-block(pad: 0.4fr)[
-
-    *1. _Refinements_* `i32`, `bool`, ...
-
-
-    *2. _Ownership_* `mut`, `&`, `&mut`, ...
-
-
-    *3. _Datatypes_* `struct`, `enum`, ...
-
-    *4. _Interfaces_* `trait`, `impl`, ...
-
-  ]
-]
-
-#slide[
-
-  = Refinements for Rust
-
-  #v(1em)
-
-  #center-block(pad: 0.4fr)[
-
-    #hide[
-      *1. _Refinements_* `i32`, `bool`, ...
-
-
-      *2. _Ownership_* `mut`, `&`, `&mut`, ...
-    ]
-
-
-    *3. _Datatypes_* `struct`, `enum`, ...
-
-    #hide[
-      *4. _Interfaces_* `trait`, `impl`, ...
-    ]
-  ]
-]
-
-
 #slide[
   == Refined Vectors: _Verification_
 
@@ -376,7 +274,6 @@
     ```
   ]
   *Exercise:* How can we _fix_ the error?
-
 ]
 
 #slide[
@@ -534,130 +431,6 @@
 
     _"Sum"_ types
   ]
-]
-
-#slide[
-  = #text(1.5em)[`enum`]
-
-  #v(1em)
-
-  *Example:* _Lists_
-]
-
-#slide[
-  == Lists: _Specification_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.05fr, size: 1em)[
-    ```rust
-
-    enum List<T> {
-      Nil,
-      Cons(T, Box<List<T>>),
-    }
-    ```
-  ]
-
-  *Unrefined* #text(1.2em)[`List`] specification
-]
-
-#slide[
-
-  == Lists: _Specification_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.05fr, size: 1em)[
-    #reveal-code(lines: (2, 3, 5), full: true)[
-      ```rust
-      #[refined_by(size : int)]
-      enum List<T> {
-        Nil -> List[0],
-        Cons(T, Box<List<T>[@n]>) -> List[n+1],
-      }
-      ```
-    ]
-  ]
-
-  *Refined* #text(1.2em)[`List`] indexed by _size_ (or _set_ or _seq_ of values)
-]
-
-#slide[
-
-  #v(-0.2em)
-
-  == Lists: _Verification_
-
-  #v(0.5em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.08fr, size: 0.70em)[
-    ```rust
-    fn append<T>(l1: &mut List<T>[@n1], l2: List<T>[@n2])
-       ensures l1: List<T>[n1+n2]
-    {
-      match l1 {
-        List::Nil => *l1 = l2,
-        List::Cons(_, t1) => append(&mut *t1, l2),
-      }
-    }
-    ```
-  ]
-
-  #v(-0.5em)
-
-  #text(size: 1.2em)[`l2`] is *_consumed_* when spliced into #text(size: 1.2em)[`l1`]
-]
-
-#slide[
-  #v(-1.2em)
-  == Lists: _Specification_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.15fr, size: 1em)[
-    ```rust
-    fn never<T>() requires false -> T
-    {
-        loop {}
-    }
-    ```
-  ]
-
-  A function that can _never_ be called at run-time...
-
-]
-
-#slide[
-
-  #v(-1.1em)
-
-  == Lists: _Verification_
-
-  #v(0.5em)
-
-  #codly(highlights: ((line: 5, start: 18, end: 24, fill: red),))
-  #codebox(pad: 0.22fr, size: 0.70em)[
-    #reveal-code(lines: (1, 2, 3, 4, 7), full: true)[
-      ```rust
-      fn get_nth<T>(l: &List<T>, k: usize) -> &T {
-        match l {
-          List::Cons(h, tl) if k == 0 => h,
-          List::Cons(h, tl) => get_nth(tl, k - 1),
-          List::Nil => never(),
-        }
-      }
-      ```
-    ]
-  ]
-
-  #v(-0.5em)
-
-  *Exercise:* _Fix_ the specification for #text(size: 1.2em)[`get_nth`]?
 ]
 
 #slide[
@@ -927,292 +700,6 @@
 
 ]
 
-
-#slide[
-  = #text(1.5em)[`enum`]
-
-  #v(1em)
-
-  *Example:* _Administrative Normal Form_
-
-]
-
-#slide[
-  == Administrative Normal Form
-
-  #text(0.7em)[Sabry & Felleisen, 1992]
-
-  #toolbox.side-by-side()[
-    #uncover("2-")[
-      *Expression*
-    ]
-  ][
-    #uncover("3-")[
-      *ANF*
-    ]
-  ]
-
-
-  // #center-block2(size1: 0.475fr)[
-  #toolbox.side-by-side()[
-    #uncover("2-")[
-      #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-      #text(1em)[
-        #codebox(pad: 0.04fr, size: 1em)[
-          ```rust
-           (1 + 2) * (4 - 3)
-          ```
-        ]
-      ]
-    ]
-  ][
-    #uncover("3-")[
-      #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-      #text(0.95em)[
-        #codebox(pad: 0.17fr, size: 1em)[
-          ```rust
-          let t1 = 1 + 2;
-          let t2 = 4 - 3;
-          t1 * t2
-          ```
-        ]
-      ]
-    ]
-  ]
-
-  #uncover(4)[
-    #text(0.8em)[Calls/operations have *_immediate operands_* (i.e. vars or constants)]
-  ]
-]
-
-#slide[
-  #v(-0.6em)
-  == Administrative Normal Form: _Specification_
-
-  #text(0.8em)[Calls/operations have *_immediate operands_* (i.e. vars or
-    constants)]
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.0fr, size: 0.53em)[
-    ```rust
-
-    enum Exp {
-
-      Var(String),
-
-      Num(i32),
-
-      Bin(Op, Box<Exp[@e1]>, Box<Exp[@e2]>),
-
-      Let(Id, Box<Exp[@e1]>, Box<Exp[@e2]>),
-    }
-    ```
-  ]
-]
-
-
-#slide[
-  #v(-0.6em)
-  == Administrative Normal Form: _Specification_
-
-  #text(0.8em)[Calls/operations have *_immediate operands_* (i.e. vars or
-    constants)]
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.0fr, size: 0.53em)[
-    #reveal-code(lines: (2, 6, 11), full: true)[
-      ```rust
-      #[refined_by(imm: bool)]
-      enum Exp {
-
-        Var(String) -> Exp[{imm: true}],
-
-        Num(i32) -> Exp[{imm: true}],
-
-        Bin(Op, Box<Exp[@e1]>, Box<Exp[@e2]>) -> Exp[{imm: false}],
-
-        Let(Id, Box<Exp[@e1]>, Box<Exp[@e2]>) -> Exp[{imm: false}])],
-      }
-      ```
-    ]
-  ]
-]
-
-
-#slide[
-  #v(-0.6em)
-  == Administrative Normal Form: _Specification_
-
-  #text(0.8em)[_*Calls/operations*_ have immediate operands (i.e. vars or
-    constants)]
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.0fr, size: 0.53em)[
-    #reveal-code(lines: (2, 6, 8, 11), full: true)[
-      ```rust
-      #[refined_by(imm: bool, anf: bool)]
-      enum Exp {
-
-        Var(String) -> Exp[{imm: true, anf: true}],
-
-        Num(i32) -> Exp[{imm: true, anf: true}],
-
-        Bin(Op, Box<Exp[@e1]>, Box<Exp[@e2]>) -> Exp[{imm: false, anf: e1.imm && e2.imm}],
-
-        Let(Id, Box<Exp[@e1]>, Box<Exp[@e2]>) -> Exp[{imm: false, anf: e1.anf && e2.anf}])],
-      }
-      ```
-    ]
-  ]
-]
-
-
-#slide[
-  #v(-0.1em)
-  == Administrative Normal Form: _Verification_
-
-  #v(0.5em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.3fr, size: 0.73em)[
-    #reveal-code(lines: (2, 4, 10), full: false)[
-      ```rust
-      fn is_imm(&Exp[@e]) -> bool[e.imm] {
-        match self {
-          Exp::Var(_) => true,
-          Exp::Num(_) => true,
-          Exp::Bin(_, e1, e2) => false,
-          Exp::Let(_, e1, e2) => false,
-        }
-      }
-      ```
-    ]
-  ]
-
-  #v(-0.5em)
-
-  #text(1em)[Function to check if expression is *_immediate_*]
-
-]
-
-
-#slide[
-  #v(-0.1em)
-  == Administrative Normal Form: _Verification_
-
-  #v(0.5em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.1fr, size: 0.73em)[
-    #reveal-code(lines: (2, 4, 5, 10), full: true)[
-      ```rust
-      fn is_anf(&Exp[@e]) -> bool[e.anf] {
-        match self {
-          Exp::Var(_) => true,
-          Exp::Num(_) => true,
-          Exp::Bin(_, e1, e2) => e1.is_imm() && e2.is_imm(),
-          Exp::Let(_, e1, e2) => e1.is_anf() && e2.is_anf(),
-        }
-      }
-      ```
-    ]
-  ]
-
-  #v(-0.5em)
-
-  #text(1em)[Function to check if expression is *_ANF_*]
-
-]
-
-#slide[
-  #v(-0.2em)
-  == Administrative Normal Form: _Conversion_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.33fr, size: 1em)[
-    #reveal-code(lines: (2, 5), full: true)[
-      ```rust
-      // Immediate subset of Exp
-      type Imm = Exp{e: e.imm};
-
-      // ANF subset of Exp
-      type Anf = Exp{e: e.anf};
-      ```
-    ]
-  ]
-
-  Two helpful type *aliases*
-
-]
-
-
-#slide[
-  #v(-1.27em)
-  == Administrative Normal Form: _Conversion_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.00fr, size: 0.82em)[
-    ```rust
-    fn to_imm(&Exp, &mut usize, &mut RVec<(Id, Anf)>) -> Imm
-    ```
-  ]
-
-  Convert #ttpurple[#text(1.2em)[`Exp`]] into
-  Temp-#text(1.2em)[`Anf`] #ttblue[bindings] + #ttgreen[#text(1.2em)[`Imm`]]
-
-  #v(0.5em)
-
-  #show: later
-
-  #toolbox.side-by-side(columns: (2fr, 0.8fr, 3fr))[
-    #uncover("2-")[#align(right)[#text(1em)[#ttpurple[`(1 + 2) * 4`]]]]
-  ][
-    #uncover("2-")[#text(1.2em)[`====>`]]
-  ][
-    #uncover("3-")[
-      #ttblue[`[(t1, 1+2), (t2, t1*4)]`]
-      #v(0.5em)
-      #ttgreen[`t2`]
-    ]
-  ]
-
-]
-
-
-#slide[
-  #v(-0.6em)
-  == Administrative Normal Form: _Conversion_
-
-  #v(1em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.28fr, size: 0.84em)[
-    ```rust
-    fn to_anf(&Exp, &mut usize) -> Anf
-    ```
-  ]
-  // #v(-0.5em)
-
-  #show: later
-
-  *Exercise:* _Implement_ #text(1.2em)[`to_anf`] so the following checks
-
-  #v(0.5em)
-
-  #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.3fr, size: 0.84em)[
-    ```rust
-    fn prop_anf(e: &Exp) {
-      assert(e.to_anf(&mut 0).is_anf())
-    }
-    ```
-  ]
-]
-
 #slide[
   = _2. Types_
 
@@ -1236,40 +723,46 @@
 
 // END-SECTION
 
+
+
 #slide[
-  #v(-0.9em)
 
-  == Refinement Types for Verified Systems
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #hide[
+      #text(1.2em)[*_1. Refinement_*]
 
-  #v(1.5em)
-
-  #toolbox.side-by-side(gutter: 0em, columns: (3.8fr, 3fr))[
-    #center-block(pad: 2em)[
-      #hide[
-        *1. _Refinement_*
-
-        #section_subtitle[Index, Existential, Ownership]
-
-        #v(1em)
-
-        *3. _Verified_*
-
-        #section_subtitle(fill: white)[SMT & CHC Solving]
-      ]
+      #section_subtitle[Index, Exist & Update]
     ]
   ][
-    #center-block(pad: 2em)[
-        *2. _Types_*
+      #text(1.2em)[*_2. Types_*]
 
-        #section_subtitle[Structs & Enums]
+      #section_subtitle[Struct & Enum]
+  ][
+    #hide[
+      #text(1.2em)[*_3. Verified Systems_*]
 
-      #hide[
-        #v(1em)
-
-        *4. _Systems_*
-
-        #section_subtitle(fill: white)[Isolation in Tock OS]
-      ]
+      #section_subtitle(fill: white)[Isolation in Tock OS Kernel]
     ]
+  ]
+]
+
+#slide[
+
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #hide[
+      #text(1.2em)[*_1. Refinement_*]
+
+      #section_subtitle[Index, Exist & Update]
+    ]
+  ][
+    #hide[
+      #text(1.2em)[*_2. Types_*]
+
+      #section_subtitle[Struct & Enum]
+    ]
+  ][
+      #text(1.2em)[*_3. Verified Systems_*]
+
+      #section_subtitle(fill: white)[Isolation in Tock OS Kernel]
   ]
 ]
