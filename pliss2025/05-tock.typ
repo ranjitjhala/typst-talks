@@ -81,7 +81,7 @@
 
   #v(1em)
 
-  #figure(image("../img/tock-process.png", width: 70%))
+  #figure(image("../img/tock-process.png", height: 4cm))
 
 ]
 
