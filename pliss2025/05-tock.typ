@@ -136,7 +136,7 @@
 
   #figure(image("../img/tock-issues.png", width: 95%))
 
-  Flux helped find five *_security vulnerabilities_* ...
+  Flux helped find *_six security vulnerabilities_* ...
 
 ]
 

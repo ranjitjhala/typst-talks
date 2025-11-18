@@ -20,6 +20,6 @@
 
     ]
   ][
-    #figure(image("../img/flux-qr.png", width: 95%))
+      #figure(image("../img/flux-qr.png", width: 95%))
   ]
 ]

@@ -1,6 +1,10 @@
 #import "@preview/polylux:0.4.0": *
 #import "../iowa_crisp.typ": *
 
+#let sosp25() = {
+  text(size: 0.8em, fill: blue)[#link("https://ranjitjhala.github.io/static/sosp25-ticktock.pdf")[\[SOSP'25\]]]
+}
+
 
 #slide[ = _3. Verified Systems_ ]
 
@@ -220,7 +224,7 @@
 
 #slide[
 
-  #v(-1.5em)
+  #v(-1.3em)
 
   = #text(0.9em)[Isolation via Memory Protection Units]
 
@@ -255,5 +259,326 @@
 
   #text(1.2em)[*Buggy _MPU Configuration_*]
 
+  MPUs permit access control over #ttblue[*_fixed size regions_*]
 
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-1.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  MPUs permit access control over #ttblue[*_fixed size regions_*]
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-2.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  MPUs permit access control over #ttblue[*_fixed size regions_*]
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-3.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  Process Accesses `Heap` + `Stack`
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-4.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  `Heap` can _grow_ via kernel syscall
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-5.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  `Heap` can _grow_ via kernel syscall
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-7.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  Covering #ttblue[*_regions_*] lets process `R+W` kernel data!
+
+]
+
+#slide[
+
+  #text(1.2em)[*Buggy _MPU Configuration_*]
+
+  #move(dx: 1.5cm)[#figure(image("../img/tock-bug-7.png", height: 8cm))]
+
+  #v(-0.5em)
+
+  *Challenge:* Ensure _gap_ to avoid overlap!
+
+]
+
+
+#slide[
+
+  #v(-3em)
+
+  #text(1.2em)[*Verified MPU Configuration*]
+
+  #v(-0.5em)
+
+  *Challenge:* Ensure _gap_ to avoid overlap!
+
+  #v(1.2em)
+
+  #uncover("2-")[
+    Refine kernel's type for *_process memory_*
+  ]
+
+  #uncover("3-")[
+    Refine MPU's type for *_region configuration_*
+  ]
+]
+
+#slide[
+
+  #text(1.2em)[*Verified MPU Configuration*]
+
+  #move(dx: -2cm)[
+    #figure(image("../img/tock-breaks.png", height: 8cm))
+  ]
+  #v(-0.5em)
+
+  Refine kernel's type for *_process memory_*
+
+]
+
+#slide[
+
+  #v(-0.8em)
+  #text(1.2em)[*Verified MPU Configuration*]
+
+  #v(0.5em)
+
+  #toolbox.side-by-side(gutter: -5em, columns: (0.56fr, 1fr))[
+    #codebox(pad: 0.0fr, size: 0.6em)[
+      ```rust
+      struct ProcessMemory
+      {
+        mem_end: Ptr[v: mem_start < v],
+        kernel_brk: Ptr[v: app_brk < v],
+        app_brk: Ptr[v: mem_start <= v],
+        mem_start: Ptr,
+      }
+      ```
+    ]
+  ][
+
+    #figure(image("../img/tock-breaks.png", height: 8cm))
+
+  ]
+
+  #v(-0.2em)
+
+  Refine kernel's type for *_process memory_*
+
+]
+
+#slide[
+
+  #v(-0.8em)
+  #text(1.2em)[*Verified MPU Configuration*]
+
+  #v(0.5em)
+
+  #toolbox.side-by-side(gutter: -2em, columns: (1fr, 0.880fr))[
+
+    #figure(image("../img/tock-breaks-regions.png", height: 8cm))
+
+  ][
+    #reveal-code(lines: (5, 12), full: true)[
+      #codebox(pad: 0.0fr, size: 0.55em)[
+        ```rust
+        struct RegionConfig<R: Region>,
+        {
+          brks: Breaks,
+          regions: Array<R>{v:valid(brks, v)}
+        }
+
+        fn valid(brks, regions) -> Bool {
+          can_access_ram(breaks, regions) &&
+          cannot_access_other(breaks, regions)
+        }
+        ```
+      ]
+    ]
+  ]
+
+  #v(-0.2em)
+
+  Refine MPU's type for *_region configuration_*
+
+]
+
+#slide[
+
+  #v(-0.8em)
+  #text(1.2em)[*Verified MPU Configuration*]
+
+  #v(0.5em)
+
+  #toolbox.side-by-side(gutter: -2em, columns: (1fr, 0.880fr))[
+
+    #figure(image("../img/tock-breaks-regions-overlap.png", height: 8cm))
+
+  ][
+
+    #codly(highlights: ((line: 9, start: 3, end: 38, fill: red),))
+    #codebox(pad: 0.0fr, size: 0.55em)[
+      ```rust
+      struct RegionConfig<R: Region>,
+      {
+        brks: Breaks,
+        regions: Array<R>{v:valid(brks, v)}
+      }
+
+      fn valid(brks, regions) -> Bool {
+        can_access_ram(breaks, regions) &&
+        cannot_access_other(breaks, regions)
+      }
+      ```
+    ]
+  ]
+
+  #v(-0.2em)
+
+  Refine MPU's type for *_region configuration_*
+
+]
+
+
+#slide[
+
+  #v(-1.6em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(1em)
+
+  Verified _MPU configuration_
+
+  #hide[
+    Verified _context switching_
+  ]
+
+]
+
+
+#slide[
+
+  #v(-1.6em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(1em)
+
+  #figure(image("../img/tock-sloc.png", width: 80%))
+
+  #v(-0.5em)
+
+  Specs = 6.5% lines of SLOC
+]
+
+#slide[
+  #v(-1.05em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(0.2em)
+
+  #figure(image("../img/tock-issues.png", height: 9cm))
+
+  #v(-0.5em)
+
+  Verification helped find & fix *_six vulnerabilities_* ...
+
+]
+
+#slide[
+  #v(-1.05em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(0.2em)
+
+  #figure(image("../img/tock-issues.png", height: 9cm))
+
+  #v(-0.5em)
+
+  ... and a *_clearer_* design with a *_faster_* kernel
+
+]
+
+// #slide[
+//   #v(-1.5em)
+
+//   = #text(1.05em)[Verified _Process Isolation_ in Tock]
+
+//   #v(1.3em)
+
+//   #figure(image("../img/tock-table.png", width: 100%))
+
+//   ... and a *_clearer_* design, yielding a *_faster_* OS kernel!
+
+// ]
+
+
+#slide[
+
+  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
+    #hide[
+      #text(1.2em)[*_1. Refinement_*]
+
+      #section_subtitle[Index, Exist & Update]
+    ]
+  ][
+    #hide[
+      #text(1.2em)[*_2. Types_*]
+
+      #section_subtitle[Struct & Enum]
+    ]
+  ][
+    #text(1.2em)[*_3. Verified Systems_*]
+
+    #section_subtitle[Isolation in Tock OS Kernel]
+  ]
 ]
