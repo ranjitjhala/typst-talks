@@ -16,51 +16,6 @@
 ]
 
 
-
-// #slide[
-//   = _1. Refinement_
-
-//   #v(1em)
-//   #one-by-one[
-
-//     *Index* specifies #ttpurple[_single value_]
-
-//   ][
-
-//     *Parameters* abstract over #ttpurple[_inputs_]
-
-//   ][
-
-//     *Existentials* represent #ttpurple[_sets of values_]
-
-//   ][
-
-//     *Ownership* enables sound #ttpurple[_type updates_]
-//   ]
-// ]
-
-// #slide[
-//   = _1. Refinement_
-
-//   #v(1em)
-
-//   *Index* specifies #ttpurple[_single value_]
-
-//   #hide[
-
-//     *Parameters* abstract over #ttpurple[_inputs_]
-
-//     *Existentials* represent #ttpurple[_sets of values_]
-
-//     *Ownership* enables sound #ttpurple[_type updates_]
-
-//   ]
-
-// ]
-
-// #slide[ = *Index* specifies #ttpurple[_single value_] ]
-
-
 #slide[
 
   = *Index* specifies #ttpurple[_single value_]
@@ -79,6 +34,8 @@
 
 #slide[
 
+  #v(-0.5em)
+
   = *Index* specifies #ttpurple[_single value_]
 
   #v(2em)
@@ -93,6 +50,8 @@
 ]
 
 #slide[
+
+  #v(-0.5em)
 
   = *Index* specifies #ttpurple[_single value_]
 
@@ -168,6 +127,8 @@
 
 #slide[
 
+  #v(-0.4em)
+
   == *Index* specifies #ttpurple[_single value_]
 
   #v(1em)
@@ -187,6 +148,9 @@
 ]
 
 #slide[
+
+  #v(0.45em)
+
   == *Index* specifies #ttpurple[_single value_]
 
   #v(1em)
@@ -200,7 +164,7 @@
     assert(10 < 2); // flux error!
     ```
   ]
-
+  #v(-0.3em)
   *Input type specifies _Precondition_* \
   A function that _requires_ input be #val[true]
 ]

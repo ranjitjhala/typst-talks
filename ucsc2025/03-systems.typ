@@ -548,19 +548,6 @@
 
 ]
 
-// #slide[
-//   #v(-1.5em)
-
-//   = #text(1.05em)[Verified _Process Isolation_ in Tock]
-
-//   #v(1.3em)
-
-//   #figure(image("../img/tock-table.png", width: 100%))
-
-//   ... and a *_clearer_* design, yielding a *_faster_* OS kernel!
-
-// ]
-
 
 #slide[
 
