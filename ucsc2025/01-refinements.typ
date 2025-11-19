@@ -582,6 +582,8 @@
 
 #slide[
 
+  #flux_logo()
+
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #text(1.2em)[*_1. Refinement_*]
 
@@ -604,6 +606,8 @@
 
 
 #slide[
+
+  #flux_logo()
 
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #hide[

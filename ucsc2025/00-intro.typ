@@ -137,31 +137,31 @@
 
   #v(1.2em)
 
-  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+  #toolbox.side-by-side(gutter: -0em, columns: (1fr, 1.4fr))[
 
     #figure(image("../img/rust-logo.png", height: 70%))
 
   ][
 
-    #figure(image("../img/android-rust-stats.png", height: 63%))
+    #figure(image("../img/android-rust-stats.png", height: 70%))
 
   ]
 ]
 
 #slide[
-  #v(-3.5em)
+  #v(-3.1em)
 
   === #text(1.1em)[What _is_ Programming Languages Research?]
 
-  #v(1.6em)
+  #v(1.2em)
 
-  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
+  #toolbox.side-by-side(gutter: -0em, columns: (1fr, 1.4fr))[
 
     #text(1.8em)[_Other bugs?_]
 
   ][
 
-    #figure(image("../img/android-rust-stats.png", height: 63%))
+    #figure(image("../img/android-rust-stats.png", height: 70%))
 
   ]
 ]
@@ -206,36 +206,6 @@
   ]
 ]
 
-
-#slide[
-  #v(-3.3em)
-
-  === #text(1.1em)[What _is_ Programming Languages Research?]
-
-  #v(1.4em)
-
-  #toolbox.side-by-side(gutter: 3em, columns: (1fr, 1.1fr))[
-
-    #text(1.8em)[_Other bugs?_]
-
-  ][
-    #hide[
-      #text(0.8em)[
-        Array Overflows
-
-        Integer Overflows
-
-        User def. invariants
-
-        Security Requirements
-
-        Functional Correctness
-      ]
-    ]
-  ]
-]
-
-
 #slide[
 
   #v(-3.3em)
@@ -266,6 +236,7 @@
 
 
 #slide[
+  #flux_logo()
 
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #uncover("1-")[

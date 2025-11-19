@@ -206,12 +206,15 @@
 ]
 
 #slide[
+
+  #v(-0.5em)
+
   == Refined Vectors: _Verification_
 
-  #v(0.4em)
+  #v(0.5em)
 
   #codly(highlights: ((line: 100, start: 0, end: 0, fill: red),))
-  #codebox(pad: 0.3fr, size: 0.6em)[
+  #codebox(pad: 0.25fr, size: 0.65em)[
     #reveal-code(lines: (3, 6, 10, 12), full: true)[
       ```rust
       fn init<F, A>(n: usize, mut f: F) -> RVec<A>[n]
@@ -219,12 +222,12 @@
         F: FnMut(usize{v:v < n}) -> A,
       {
         let mut i = 0;
-        let mut res = RVec::new();  // res: ?
+        let mut res = RVec::new(); // res: RVec<i32>[0]
         while i < n  {
           res.push(f(i));
-          i += 1;                   // res: ?
+          i += 1;                  // res: RVec<i32>[i]
         }
-        res                         // res: ?
+        res                        // res: RVec<i32>[n]
       }
       ```
     ]
@@ -259,14 +262,14 @@
 
   #v(0.8em)
 
-  #codly(highlights: ((line: 5, start: 23, end: 23, fill: red),))
+  #codly(highlights: ((line: 5, start: 20, end: 22, fill: red),))
   #codebox(pad: 0.38fr, size: 0.6em)[
     ```rust
     fn dot(x:&RVec<f64>, y:&RVec<f64>) -> f64 {
       let mut res = 0.0;
       let mut i = 0;
       while (i < xs.len()) {
-        res += xs[i] + ys[i];
+        res += x[i] * y[i];
         i += 1;
       }
       res
@@ -329,6 +332,7 @@
 ]
 
 #slide[
+  #v(-1em)
   = Neuron Layer: _Verification_
 
   #v(0.5em)
@@ -341,7 +345,9 @@
       Layer {
         num_inputs: i,
         num_outputs: o,
-        weight: init(o, |_| init(i, |_| rng.gen_range(-1.0..1.0))),
+        weight: init(o, |_|
+                  init(i, |_|
+                    rng.gen_range(-1.0..1.0))),
         bias: init(o, |_| rng.gen_range(-1.0..1.0)),
         outputs: init(o, |_| 0.0),
       }
@@ -727,6 +733,8 @@
 
 #slide[
 
+  #flux_logo()
+
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #hide[
       #text(1.2em)[*_1. Refinement_*]
@@ -747,6 +755,7 @@
 ]
 
 #slide[
+  #flux_logo()
 
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #hide[

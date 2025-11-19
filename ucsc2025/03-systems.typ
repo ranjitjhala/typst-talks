@@ -8,31 +8,6 @@
 
 #slide[ = _3. Verified Systems_ ]
 
-
-
-#slide[
-
-  #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
-    #hide[
-      #text(1.2em)[*_1. Refinement_*]
-
-      #section_subtitle[Index, Exist & Update]
-    ]
-  ][
-    #hide[
-      #text(1.2em)[*_2. Types_*]
-
-      #section_subtitle[Struct & Enum]
-    ]
-  ][
-    #text(1.2em)[*_3. Verified Systems_*]
-
-    #section_subtitle[Isolation in Tock OS Kernel]
-  ]
-]
-
-#slide[ = Verified Systems ]
-
 #slide[
   #v(-1.2em)
 
@@ -42,12 +17,13 @@
 
   #figure(image("../img/tock.png", height: 5cm))
 
-  #text(1.4em)[An _Embedded_ OS Kernel]
+  #uncover("2-")[
+    #text(1.4em)[An _Embedded_ OS Kernel]
 
-  #v(-0.7em)
+    #v(-0.7em)
 
-  #text(0.7em)[Levy _et al._ SOSP 2017, Schuermann _et al._ SOSP 2025]
-
+    #text(0.7em)[Levy _et al._ SOSP 2017, Schuermann _et al._ SOSP 2025]
+  ]
 ]
 
 
@@ -75,11 +51,13 @@
 
   #v(.5em)
 
+  #uncover("2-")[
   #figure(image("../img/tock-arch-0.png", height: 9cm))
 
   #v(-0.5em)
 
   #text(fill: orange)[*Capsules*] enjoy Rust's safety guarantees
+  ]
 ]
 
 
@@ -224,7 +202,7 @@
 
 #slide[
 
-  #v(-1.3em)
+  #v(-2.1em)
 
   = #text(0.9em)[Isolation via Memory Protection Units]
 
@@ -235,7 +213,7 @@
   #v(-0.5em)
 
   #uncover("2-")[
-    #figure(image("../img/tock-known-bugs.png", height: 9.5cm))
+    #figure(image("../img/tock-known-bugs.png", height: 8.0cm))
   ]
 ]
 
@@ -249,7 +227,7 @@
 
   #uncover("2-")[
     #hide[
-      Buggy _context switching_
+      Buggy _interrupts & context switching_
     ]
   ]
 
@@ -431,10 +409,10 @@
         struct RegionConfig<R: Region>,
         {
           brks: Breaks,
-          regions: Array<R>{v:valid(brks, v)}
+          regions: Array<R>{v: ok_regions(brks, v)}
         }
 
-        fn valid(brks, regions) -> Bool {
+        fn ok_regions(brks, regions) -> Bool {
           can_access_ram(breaks, regions) &&
           cannot_access_other(breaks, regions)
         }
@@ -468,10 +446,10 @@
       struct RegionConfig<R: Region>,
       {
         brks: Breaks,
-        regions: Array<R>{v:valid(brks, v)}
+        regions: Array<R>{v: ok_regions(brks, v)}
       }
 
-      fn valid(brks, regions) -> Bool {
+      fn ok_regions(brks, regions) -> Bool {
         can_access_ram(breaks, regions) &&
         cannot_access_other(breaks, regions)
       }
@@ -497,10 +475,74 @@
   Verified _MPU configuration_
 
   #hide[
-    Verified _context switching_
+    Verified _interrupts & context switching_
   ]
 
 ]
+
+#slide[
+
+  #v(-1.6em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(1em)
+
+  #hide[
+    Verified _MPU configuration_
+  ]
+
+    Verified _interrupts & context switching_
+
+]
+
+
+
+#slide[
+
+  #v(-1.6em)
+
+  == Verified Interrupts & Context switching
+
+  _Interrupts_ can break isolation in various ways
+
+  #uncover("2-")[
+    #figure(image("../img/interrupt-bug.png", width: 50%))
+  ]
+
+]
+
+#slide[
+
+  #v(-1.6em)
+
+  == Verified Interrupts & Context switching
+
+  Lift `ARM` assembly to _Refined_ Rust methods `FluxARM`
+
+  #uncover("2-")[
+    #figure(image("../img/flux-arm.png", width: 60%))
+  ]
+
+  #uncover("3-")[
+    #text(0.8em)[Verify handlers save & restore kernel/MPU configuration]
+  ]
+]
+
+#slide[
+
+  #v(-1.6em)
+
+  = Verified _Isolation_ in Tock #sosp25()
+
+  #v(1em)
+
+    Verified _MPU configuration_
+
+    Verified _interrupts & context switching_
+
+]
+
 
 
 #slide[
@@ -550,6 +592,7 @@
 
 
 #slide[
+  #flux_logo()
 
   #toolbox.side-by-side(gutter: 0.17em, columns: (2.8fr, 2.7fr, 3.9fr))[
     #hide[

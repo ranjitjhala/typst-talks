@@ -73,6 +73,10 @@
   })
 }
 
+#let flux_logo() = {
+  figure(image("img/flux.png", width: 35%))
+}
+
 #let center-block(pad: 0.15fr, body) = {
   grid(
     columns: (pad, 1fr, pad),
