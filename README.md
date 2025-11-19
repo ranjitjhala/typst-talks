@@ -17,6 +17,12 @@ vectors.rs
 - `fn init`
 
 neural.rs
-- Layer::new
-- Layer::forward
-- Network::forward
+- `Layer::new`
+- `Layer::forward`
+- `Network::forward`
+
+ Join in the fun!
+
+- github link
+- verify-rust-std
+- get involved!

@@ -514,7 +514,7 @@
 
 #slide[
 
-  #v(-1.6em)
+  #v(-1.8em)
 
   == Verified Interrupts & Context switching
 
