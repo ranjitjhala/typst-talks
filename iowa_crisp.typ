@@ -19,6 +19,10 @@
 #let ttpurple(body) = ttcol(body, lavender)
 #let ttwhite(body) = ttcol(body, white)
 
+#let todo(body) = {
+  text(size: 2em)[#ttred[*TODO*: #body]]
+}
+
 
 #let ty(size: 1em, base) = {
   text(size, font: codefont, ligatures: true)[#ttgreen[#base]]
@@ -40,6 +44,11 @@
   text(size, font: codefont, ligatures: true)[#ty[#base]\{#val:#reft[#expr]\} ]
 }
 
+#let fhtriple(size: 2em, pre, c, post) = {
+  text(size, font: codefont, ligatures: true)[
+    #ttblue[{#pre}] c #ttgreen[{#post}]
+  ]
+}
 
 #let alert(body, fill: red) = {
   set text(white)
@@ -131,9 +140,35 @@
       ),
     ),
   )
-  set page(paper: "presentation-16-9")
+  // set page(paper: "presentation-16-9")
+  set page(paper: "presentation-16-9", margin: (top: 0.5em, bottom: 0.5em, left: 0.5em, right: 0.5em))
   set text(size: 30pt, font: "Iowan Old Style")
   set align(center + horizon)
   set raw(syntaxes: "Rust.sublime-syntax")
   [#doc]
+}
+
+#let my-outline(n, full: false) = {
+  let items = (
+    [#text(1.2em)[*1. Problem*]],
+    [#v(-0.5em) Program Logic _vs._ 21#super[st] century features],
+    [#v(0.5em) #text(1.2em)[*2: Solution*]],
+    [#v(-0.5em) Refinements: _Weave_ #ttpurple[*assertions*] into #ttgreen[*types*]],
+    [#v(0.5em) #text(1.2em)[*3: Speculation*]],
+    [#v(-0.5em)
+      _Lift_ code to propositions proved in Lean],
+  )
+
+  if full {
+    v(-0.8em)
+    stack(dir: ttb, spacing: 1.2em, ..items)
+  } else {
+    let visible = if calc.even(n) {
+      items.slice(0, n - 2).map(hide) + items.slice(n - 2, n)
+    } else {
+      items.slice(0, n - 1).map(hide) + (items.at(n - 1),)
+    }
+    v(-0.8em)
+    stack(dir: ttb, spacing: 1.2em, ..visible)
+  }
 }
