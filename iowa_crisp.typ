@@ -172,3 +172,28 @@
     stack(dir: ttb, spacing: 1.2em, ..visible)
   }
 }
+
+
+#let my-outline-codemetal(n, full: false) = {
+  let items = (
+    [#text(1.2em)[*1. Problem*]],
+    [#v(-0.5em) Program Logic _vs._ 21#super[st] century features],
+    [#v(0.5em) #text(1.2em)[*2. Solution*]],
+    [#v(-0.5em) Refinements: _Weave_ #ttpurple[*assertions*] into #ttgreen[*types*]],
+    [#v(0.5em) #text(1.2em)[*3. Verified Systems*]],
+    [#v(-0.5em) Isolation in Tock OS Kernel],
+  )
+
+  if full {
+    v(-0.8em)
+    stack(dir: ttb, spacing: 1.2em, ..items)
+  } else {
+    let visible = if calc.even(n) {
+      items.slice(0, n - 2).map(hide) + items.slice(n - 2, n)
+    } else {
+      items.slice(0, n - 1).map(hide) + (items.at(n - 1),)
+    }
+    v(-0.8em)
+    stack(dir: ttb, spacing: 1.2em, ..visible)
+  }
+}
